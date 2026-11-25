@@ -132,14 +132,14 @@ function renderCards(list) {
  <div class="info">
  <h2>${m.title}</h2>
  <p class="year">${m.year}</p>
- <button class="like"
-type="button">♥</button>
+ <button class="like" type="button">♥</button>
  </div>`;
         board.appendChild(card);
-        document.
-            getElementById("count").textContent = list.length + "편";
-updateLikeCount();
     }
+    document.getElementById("count").textContent = list.length + "편";
+    updateLikeCount();
+    if (list.length === 0) { board.classList.add("is-empty"); }
+    else { board.classList.remove("is-empty"); }
 }
 function sortBy(list, key, desc) {
     const copy = [...list];
@@ -176,8 +176,11 @@ document.querySelector(".board").addEventListener("click", (e) => {
         (e.target.classList.contains("like")) { e.target.classList.toggle("liked"); updateLikeCount(); }
 });
 
- function updateLikeCount() { document.getElementById("likeCount").textContent =
-document.querySelectorAll(".liked").length; }
+function updateLikeCount() {
+    document.getElementById("likeCount").textContent =
+    document.querySelectorAll(".liked").length;
+}
 
-document.getElementById("q").addEventListener("keydown", (e) => { if (e.key === "Escape")
-{ e.target.value = ""; renderCards(getView()); } });
+document.getElementById("q").addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { e.target.value = ""; renderCards(getView()); }
+});
